@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4243661851364308}
   - component: {fileID: 114252373118954356}
   m_Layer: 0
-  m_Name: sample_start_room
+  m_Name: start_room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fda1be0f47f4d2eb0cd4977c7295a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomAuthor: AP Thomson
+  roomAuthor: Bilbo
   designedRoomFile: {fileID: 4900000, guid: 238b601d8b551461db48fb05e5ca8637, type: 3}
   localTilePrefabs:
   - {fileID: 1224687453642000, guid: bba9de82886db444980f5c22f285e992, type: 3}
-  - {fileID: 1312951893184288, guid: 68f68340d004845b1b0a1ace895aa64d, type: 3}
+  - {fileID: 1753806526501684, guid: ecfac3a4e68179b4cb9ddaed160721dd, type: 3}
   roomGridX: 0
   roomGridY: 0
