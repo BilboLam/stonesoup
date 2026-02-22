@@ -12,6 +12,7 @@ public class bil121ChiliPepper : Tile {
 	protected float _origMoveSpeed;
 	protected float _origMoveAcceleration;
 	protected bool _applied;
+	protected bool _stopFlashing;
 
 	public override void useAsItem(Tile tileUsingUs) {
 		if (_applied || tileUsingUs == null || !tileUsingUs.hasTag(TileTags.Creature)) return;
@@ -44,13 +45,35 @@ public class bil121ChiliPepper : Tile {
 			}
 		}
 
+		_stopFlashing = false;
+		StartCoroutine(FlashRed());
 		StartCoroutine(ExplodeAfterDelay(duration));
+	}
+
+	protected IEnumerator FlashRed() {
+		float elapsed = 0f;
+		while (!_stopFlashing && _buffedCreature != null && _buffedCreature.sprite != null) {
+			_buffedCreature.sprite.color = Color.red;
+			float t = Mathf.Clamp01(elapsed / (duration-0.5f));
+			float interval = Mathf.Lerp(0.2f, 0.03f, t);
+			yield return new WaitForSeconds(interval);
+			elapsed += interval;
+			if (_stopFlashing) break;
+			_buffedCreature.sprite.color = Color.white;
+			yield return new WaitForSeconds(interval);
+			elapsed += interval;
+		}
+		if (_buffedCreature != null && _buffedCreature.sprite != null) {
+			_buffedCreature.sprite.color = Color.white;
+		}
 	}
 
 	protected IEnumerator ExplodeAfterDelay(float delay) {
 		yield return new WaitForSeconds(delay);
 
+		_stopFlashing = true;
 		if (_buffedCreature != null) {
+			if (_buffedCreature.sprite != null) _buffedCreature.sprite.color = Color.white;
 			Player p = _buffedCreature.GetComponent<Player>();
 			if (p != null) {
 				p.moveSpeed = _origMoveSpeed;
