@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4345752688142990}
   - component: {fileID: 61478977975098820}
   - component: {fileID: 50891172653277798}
-  - component: {fileID: -6535289578296823470}
+  - component: {fileID: -5632115138590812731}
   m_Layer: 0
-  m_Name: Chili Pepper
+  m_Name: Trap Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4853854246499708}
-  - {fileID: 3107090189471111691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61478977975098820
@@ -109,7 +108,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-6535289578296823470
+--- !u!114 &-5632115138590812731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,24 +117,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753806526501684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dff1d45e7131fa47bca239b1c66796c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c5482fc1ddd69c4dbf1993039e67b3d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::bil121ChiliPepper
-  tags: 49410
-  tileName: Chili Pepper
-  health: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Bil122PlaceableWall
+  tags: 0
+  tileName: 
+  health: 10
   deathEffect: {fileID: 0}
   deathSFX: {fileID: 0}
-  heldOffset: {x: 0, y: 0}
+  heldOffset: {x: 0.2, y: -0.1}
   heldAngle: 0
   tileWereHolding: {fileID: 0}
   aimDirection: {x: 0, y: 0}
-  duration: 2
-  explosionRadius: 3
-  explosionDamage: 9999
-  explosionEffect: {fileID: 3565353455141366795, guid: 1df9f8c9fe8e9f34f846ff227f636d90,
-    type: 3}
-  pivot: {fileID: 3107090189471111691}
+  wallPrefab: {fileID: 1249101369981090, guid: ad909242602e14ab893ee3381803cc01, type: 3}
+  triggeredSprite: {fileID: 1040021060, guid: 135161ab9b8c69745a729fe335ffaee6, type: 3}
+  triggerDirection: 0
+  directionOffset: 2
+  orientation: 0
 --- !u!1 &1920377306075720
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,8 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8776875300313918795, guid: cf219350629467e40a79e5f8e0b2b7ce,
-    type: 3}
+  m_Sprite: {fileID: -1323168002, guid: 135161ab9b8c69745a729fe335ffaee6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -227,34 +224,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &3852894367761539100
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3107090189471111691}
-  m_Layer: 0
-  m_Name: pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3107090189471111691
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3852894367761539100}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4345752688142990}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -1,19 +1,56 @@
 using System.Collections;
 using UnityEngine;
 
-public class bil121ChiliPepper : Tile {
+public class ChiliPepper : Tile {
 
 	public float duration = 2f;
 	public float explosionRadius = 3f;
 	public int explosionDamage = 2;
 	public GameObject explosionEffect;
 
+	public Transform pivot;
 	protected Tile _buffedCreature;
 	protected float _origMoveSpeed;
 	protected float _origMoveAcceleration;
 	protected bool _applied;
 	protected bool _stopFlashing;
 
+	public override void pickUp(Tile tilePickingUsUp) {
+		if (!_alive) {
+			return;
+		}
+		base.pickUp(tilePickingUsUp);
+		mainCollider.enabled = false;
+		if (_tileHoldingUs == tilePickingUsUp) {
+			finishPickUp(tilePickingUsUp);
+		}
+	}
+
+	public virtual void finishPickUp(Tile tilePickingUsUp) {
+		pivot.transform.parent = _tileHoldingUs.transform;
+		pivot.transform.localPosition = Vector3.zero;
+		transform.parent = pivot;
+		transform.localPosition = new Vector3(0.5f, 0, 0);
+		transform.localRotation = Quaternion.identity;
+	}
+	public override void dropped(Tile tileDroppingUs) {
+		base.dropped(tileDroppingUs);
+		mainCollider.enabled = true;
+		if (pivot != null) {
+			pivot.transform.parent = transform;
+		}
+	}
+	protected virtual void aim() {
+		float aimAngle = Mathf.Atan2(_tileHoldingUs.aimDirection.y, _tileHoldingUs.aimDirection.x)*Mathf.Rad2Deg;
+		pivot.transform.localRotation = Quaternion.Euler(0, 0, aimAngle);
+	}
+
+	void Update() {
+		if (_tileHoldingUs != null) {
+			aim();
+		}
+		updateSpriteSorting();
+	}
 	public override void useAsItem(Tile tileUsingUs) {
 		if (_applied || tileUsingUs == null || !tileUsingUs.hasTag(TileTags.Creature)) return;
 		_applied = true;
@@ -22,8 +59,6 @@ public class bil121ChiliPepper : Tile {
 		if (col != null) col.enabled = false;
 		if (sprite != null) sprite.enabled = false;
 		_buffedCreature = tileUsingUs;
-		transform.SetParent(_buffedCreature.transform);
-		transform.localPosition = new Vector3(0, 0, -0.1f);
 
 		tileUsingUs.tileWereHolding = null;
 		_tileHoldingUs = null;
@@ -71,6 +106,7 @@ public class bil121ChiliPepper : Tile {
 	protected IEnumerator ExplodeAfterDelay(float delay) {
 		yield return new WaitForSeconds(delay);
 
+		// reset speed
 		_stopFlashing = true;
 		if (_buffedCreature != null) {
 			if (_buffedCreature.sprite != null) _buffedCreature.sprite.color = Color.white;
@@ -87,10 +123,15 @@ public class bil121ChiliPepper : Tile {
 			}
 		}
 
+		// spawn explosion effect
 		Vector2 explosionCenter = transform.position;
+		GameObject explosionPrefab = null;
 		if (explosionEffect != null) {
-			Instantiate(explosionEffect, explosionCenter, Quaternion.identity);
+			explosionPrefab = Instantiate(explosionEffect, explosionCenter, Quaternion.identity);
 		}
+
+		// do damage
+		yield return new WaitForSeconds(0.2f);
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionCenter, explosionRadius);
 		foreach (Collider2D c in colliders) {
 			Tile tile = c.GetComponent<Tile>();
@@ -98,6 +139,9 @@ public class bil121ChiliPepper : Tile {
 			tile.takeDamage(this, explosionDamage, DamageType.Explosive);
 		}
 
+		// destroy explosion effect
+		yield return new WaitForSeconds(1f);
+		Destroy(explosionPrefab);
 		Destroy(gameObject);
 	}
 }

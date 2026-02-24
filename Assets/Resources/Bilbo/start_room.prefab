@@ -47,7 +47,7 @@ MonoBehaviour:
   roomAuthor: Bilbo
   designedRoomFile: {fileID: 4900000, guid: 238b601d8b551461db48fb05e5ca8637, type: 3}
   localTilePrefabs:
-  - {fileID: 1224687453642000, guid: bba9de82886db444980f5c22f285e992, type: 3}
+  - {fileID: 1753806526501684, guid: 3f6ba995ff2d3584c8fe82c42c5ca61b, type: 3}
   - {fileID: 1753806526501684, guid: ecfac3a4e68179b4cb9ddaed160721dd, type: 3}
   roomGridX: 0
   roomGridY: 0
