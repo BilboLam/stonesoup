@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Flying sword: wanders as creature, detects nearby creatures, steps back → charges → dashes (one damage per enemy), then pickable; timeout returns to wandering.
 public class FlyingSword : BasicAICreature {
 
 	public enum State {

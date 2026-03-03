@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogLockedTile
   tags: 1
-  tileName: 
+  tileName: Fog Generator
   health: 2
   deathEffect: {fileID: 0}
   deathSFX: {fileID: 0}

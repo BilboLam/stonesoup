@@ -131,7 +131,7 @@ MonoBehaviour:
   aimDirection: {x: 0, y: 0}
   wallPrefab: {fileID: 1249101369981090, guid: ad909242602e14ab893ee3381803cc01, type: 3}
   triggeredSprite: {fileID: 1040021060, guid: 135161ab9b8c69745a729fe335ffaee6, type: 3}
-  triggerDirection: 0
+  triggerDirection: 1
   directionOffset: 2
   orientation: 0
 --- !u!1 &1920377306075720
