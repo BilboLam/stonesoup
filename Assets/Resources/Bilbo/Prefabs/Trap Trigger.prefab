@@ -133,7 +133,7 @@ MonoBehaviour:
   triggeredSprite: {fileID: 1040021060, guid: 135161ab9b8c69745a729fe335ffaee6, type: 3}
   triggerDirection: 1
   directionOffset: 2
-  orientation: 0
+  orientation: 1
 --- !u!1 &1920377306075720
 GameObject:
   m_ObjectHideFlags: 0

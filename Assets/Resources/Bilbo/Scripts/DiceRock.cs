@@ -120,11 +120,13 @@ public class DiceRock : Tile {
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (!_isInAir) return;
 		Tile otherTile = collision.gameObject.GetComponent<Tile>();
-		if (otherTile == null || !otherTile.hasTag(TileTags.Creature)) return;
+		if (otherTile == null) return;
 		float impact = collisionImpactLevel(collision);
 		if (impact <= damageThreshold) return;
 		int roll = Random.Range(1, 7);
+		int oldHealth = otherTile.health;
 		otherTile.takeDamage(this, roll);
+		if (otherTile.health >= oldHealth) return;
 		if (_body != null) otherTile.addForce(_body.linearVelocity.normalized*damageForce);
 		ShowDamageText(otherTile, roll);
 		HandleSpecialRoll(roll);
